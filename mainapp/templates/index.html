@@ -1,0 +1,28 @@
+  {% extends 'base.html' %}
+  {% load staticfiles %}
+
+  {% block content %}
+    {% for cat in cats %}
+      <a href='/{{ cat.id }}'>
+        <h3>Name: {{ cat.name }}</h3>
+      </a>
+        <a href='/user{{ cat.user.username }}'>
+          <p>Adopted By: {{ cat.user.username }}</p>
+        </a>
+        {% if cat.age > 0 %}
+        <p>Age: {{ cat.age }}</p>
+        {% else %}
+        <p>Age: Kitten</p>
+        {% endif %}
+    <hr />
+    {% endfor %}
+
+
+    <form action='post_cat/' method='post'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type='submit' value='submit' />
+    </form>
+
+
+  {% endblock %}
