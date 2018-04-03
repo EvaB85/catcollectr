@@ -11,4 +11,5 @@ urlpatterns = [
     path('signup/', views.signup, name="signup"),
     path('like_cat/', views.like_cat, name="like_cat"),
     path('<int:cat_id>/edit', views.edit_cat, name="edit_cat"),
+    path('<int:cat_id>/destroy/', views.delete_cat, name="delete_cat"),
 ]

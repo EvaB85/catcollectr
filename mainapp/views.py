@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cat
 from .forms import CatForm, LoginForm, SignUpForm
 from django.contrib.auth.models import User
@@ -80,4 +80,15 @@ def like_cat(request):
     return HttpResponse(likes)
 
 def edit_cat(request, cat_id):
-    
+    instance = get_object_or_404(Cat, id=cat_id)
+    form = CatForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('show', cat_id)
+    return render(request, 'edit_cat.html', {'cat': instance, 'form': form})
+
+def delete_cat(request, cat_id):
+    if request.method == 'POST':
+        instance = Cat.objects.get(pk=cat_id)
+        instance.delete()
+        return redirect('index')

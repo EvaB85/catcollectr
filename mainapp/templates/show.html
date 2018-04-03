@@ -11,4 +11,9 @@
       <p>Adopted By: {{ cat.user.username }}</p>
     </a>
 
+    <form action="/{{ cat.id }}/destroy/" method='post'>
+      {% csrf_token%}
+      <input type='submit' value="DESTROY" />
+    </form>
+
 {% endblock %}

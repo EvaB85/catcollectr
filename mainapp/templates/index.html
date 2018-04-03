@@ -3,6 +3,7 @@
 
   {% block content %}
     {% for cat in cats %}
+    
       <a href='/{{ cat.id }}'>
         <h3>Name: {{ cat.name }}</h3>
       </a>
@@ -14,7 +15,7 @@
         {% else %}
         <p>Age: Kitten</p>
         {% endif %}
-        <a class="waves-effect waves-light btn" data-id="{{ cat.id }}">
+        <a class="waves-effect waves-light btn like" data-id="{{ cat.id }}">
           Likes: {% if cat.likes > 0 %} {{ cat.likes }} {% else %} None :( {% endif %}
         </a>
 
@@ -23,7 +24,7 @@
     <hr />
     {% endfor %}
 
-
+    <h4>Add a new cat:</h4>
     <form action='post_cat/' method='post'>
       {% csrf_token %}
       {{ form.as_p }}

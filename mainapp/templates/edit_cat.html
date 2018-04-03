@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h4>Edit this cat:</h4>
+<form action='/{{ cat.id }}/edit' method='post'>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type='submit' value='submit' />
+</form>
+
+
+{% endblock %}
