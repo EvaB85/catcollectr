@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Cat(models.Model):
+    likes = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)

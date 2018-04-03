@@ -14,6 +14,12 @@
         {% else %}
         <p>Age: Kitten</p>
         {% endif %}
+        <a class="waves-effect waves-light btn" data-id="{{ cat.id }}">
+          Likes: {% if cat.likes > 0 %} {{ cat.likes }} {% else %} None :( {% endif %}
+        </a>
+
+
+
     <hr />
     {% endfor %}
 

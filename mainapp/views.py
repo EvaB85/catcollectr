@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Cat
 from .forms import CatForm, LoginForm, SignUpForm
 from django.contrib.auth.models import User
@@ -67,3 +67,17 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+def like_cat(request):
+    cat_id = request.GET.get('cat_id', None)
+    likes = 0
+    if (cat_id):
+        cat = Cat.objects.get(id=int(cat_id))
+        if cat is not None:
+            likes = cat.likes + 1
+            cat.likes = likes
+            cat.save()
+    return HttpResponse(likes)
+
+def edit_cat(request, cat_id):
+    
